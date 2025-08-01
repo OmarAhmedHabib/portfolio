@@ -1,19 +1,17 @@
 import Header from "@/components/Header";
-import About from "@/app/about/page";
-import PortfolioPage from "@/app/portfolio/page";
-import DemosPage from "@/app/demos/page";
-import SkillsPage from "@/app/skills/page";
-import ResumePage from "./resume/page";
+import AboutPage from "@/components/about";
+import PortfolioPage from "@/components/portfolio";
+import SkillsSection from "@/components/skills";
+import ResumePage from "@/components/resume";
+import DemosPage from "@/components/demos";
 
-
-
-export default function HomePage() {
+export default function Home() {
   return (
     <>
       <Header />
-      <About />
+      <AboutPage />
       <PortfolioPage />
-      <SkillsPage />
+      <SkillsSection />
       <ResumePage />
       <DemosPage />
     </>

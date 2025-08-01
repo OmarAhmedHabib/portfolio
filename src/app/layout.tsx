@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
@@ -13,27 +14,28 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" dir="ltr">
       <head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        />
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#0f0c29" />
       </head>
-      <body className="bg-[#26166dea] ">
-        <NavBar />
-        <main>{children}</main>
-        <Footer />
+      <body className="bg-dark-purple">
+        <div className="container-fluid p-0">
+          <NavBar />
+          {children}
+          <Footer />
+        </div>
+
+        {/* Bootstrap JS Bundle */}
+        <script 
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+          integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" 
+          crossOrigin="anonymous" 
+          async
+        ></script>
       </body>
     </html>
   );

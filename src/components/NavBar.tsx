@@ -3,74 +3,92 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { FaRocket, FaUserAstronaut, FaMeteor, FaSatellite, FaGlobe, FaFileAlt, FaBars, FaTimes } from 'react-icons/fa';
 
 const navLinks = [
-  { href: '/', text: 'Home', icon: 'rocket' },
-  { href: '/about', text: 'About', icon: 'user-astronaut' },
-  { href: '/portfolio', text: 'Projects', icon: 'meteor' },
-  { href: '/skills', text: 'Skills', icon: 'satellite' },
-  { href: '/demos', text: 'Demos', icon: 'globe' },
-  { href: '/resume', text: 'Download Resume', icon: 'file-alt', isButton: true },
+  { href: '/', text: 'Home', icon: <FaRocket /> },
+  { href: '/about', text: 'About', icon: <FaUserAstronaut /> },
+  { href: '/portfolio', text: 'Projects', icon: <FaMeteor /> },
+  { href: '/skills', text: 'Skills', icon: <FaSatellite /> },
+  { href: '/demos', text: 'Demos', icon: <FaGlobe /> },
+  { href: '/resume', text: 'Download Resume', icon: <FaFileAlt />, isButton: true },
 ];
 
-const NavBar = () => {
+export default function NavBar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // إغلاق القائمة عند الضغط خارجها
+  // ✅ إغلاق القائمة عند النقر خارجها
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if ((e.target as HTMLElement)?.closest('.offcanvas-menu') === null) {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.offcanvas-menu') && !target.closest('.menu-toggle')) {
         setMenuOpen(false);
       }
     };
 
     if (menuOpen) {
       document.addEventListener('click', handleClickOutside);
-    } else {
-      document.removeEventListener('click', handleClickOutside);
     }
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
+    return () => document.removeEventListener('click', handleClickOutside);
   }, [menuOpen]);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-[#0f0c29] via-[#08014d] to-[#7b7bacb4] shadow-lg border-b border-cyan-500/20 backdrop-blur">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo */}
-        <Link href="/" className="text-2xl font-extrabold text-white tracking-wide">
-          <span className="bg-gradient-to-r from-[#64ffda] to-[#2979ff] text-transparent bg-clip-text">
+    <nav
+      className="fixed-top w-100 z-50 shadow-lg"
+      role="navigation"
+      style={{
+        background: 'linear-gradient(to right, #0f0c29, #08014d, #7b7bacb4)',
+        borderBottom: '1px solid rgba(0, 255, 255, 0.1)',
+        backdropFilter: 'blur(10px)',
+      }}
+    >
+      <div className="container px-4 py-3 d-flex justify-content-between align-items-center">
+        {/* ✅ Logo */}
+        <Link href="/" className="text-decoration-none">
+          <span
+            className="fs-3 fw-bolder text-white"
+            style={{
+              background: 'linear-gradient(to right, #64ffda, #2979ff)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
             OMAR
           </span>
-          <span className="bg-gradient-to-r to-[#9e0289] from-[#f33303d2] text-transparent bg-clip-text ">
+          <span
+            className="fs-3 fw-bolder"
+            style={{
+              background: 'linear-gradient(to right, #97afbb, #ca7cc0)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
             Habib
           </span>
         </Link>
 
-        {/* Toggle Button for Mobile */}
+        {/* ✅ Toggle Button for Mobile */}
         <button
-          className="md:hidden text-white text-2xl px-3"
+          className="d-md-none btn text-white fs-4 px-3 menu-toggle"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
         >
-          <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+          {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-8">
+        {/* ✅ Desktop Menu */}
+        <ul className="d-none d-md-flex list-unstyled gap-4 mb-0">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={`flex items-center gap-2 text-sm font-medium transition rounded px-4 py-2 ${
-                  pathname === link.href
-                    ? 'bg-[#09a79f] text-cyan-400'
-                    : 'text-white hover:text-cyan-400 hover:bg-white/10'
-                } ${link.isButton ? 'bg-cyan-400 text-black rounded-full px-5' : ''}`}
+                className={`d-flex align-items-center gap-2 small fw-medium rounded-5 px-3 py-2 text-decoration-none ${
+                  pathname === link.href ? 'bg-info text-dark' : 'text-white hover-bg-white-50'
+                } ${link.isButton ? 'bg-primary text-dark hover-bg-primary rounded-5 px-4' : ''}`}
               >
-                <i className={`fas fa-${link.icon}`}></i>
+                {link.icon}
                 {link.text}
               </Link>
             </li>
@@ -78,32 +96,31 @@ const NavBar = () => {
         </ul>
       </div>
 
-      {/* Mobile Offcanvas Menu */}
+      {/* ✅ Mobile Offcanvas Menu */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-[#0f0c29] z-50 transform transition-transform duration-300 ease-in-out ${
-          menuOpen ? 'translate-x-0' : 'translate-x-full'
-        } offcanvas-menu`}
+        className={`position-fixed top-0 end-0 h-100 w-75 bg-dark z-50 transition-transform offcanvas-menu ${
+          menuOpen ? 'translate-x-0' : 'translate-x-100'
+        }`}
+        style={{ backgroundColor: '#0f0c29' }}
       >
-        <div className="flex items-center justify-between px-4 py-4 border-b border-cyan-400/10">
-          <h2 className="text-white text-lg font-semibold">Menu</h2>
-          <button onClick={() => setMenuOpen(false)} className="text-white">
-            <i className="fas fa-times text-xl"></i>
+        <div className="d-flex align-items-center justify-content-between px-4 py-3 border-bottom border-info border-opacity-10">
+          <h2 className="text-white fs-5 fw-semibold mb-0">Menu</h2>
+          <button onClick={() => setMenuOpen(false)} className="btn text-white fs-4">
+            <FaTimes />
           </button>
         </div>
 
-        <ul className="flex flex-col items-start gap-2 px-4 py-6 bg-[#1f183fe3]">
+        <ul className="d-flex flex-column align-items-start gap-2 px-3 py-4 list-unstyled mb-0">
           {navLinks.map((link) => (
-            <li key={link.href} className="w-full">
+            <li key={link.href} className="w-100">
               <Link
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className={`flex items-center gap-3 w-full px-4 py-2 rounded text-sm font-medium transition ${
-                  pathname === link.href
-                    ? 'bg-cyan-400 text-black'
-                    : 'text-white hover:text-cyan-400 hover:bg-white/10'
-                } ${link.isButton ? 'bg-cyan-400 text-black rounded-full px-5' : ''}`}
+                className={`d-flex align-items-center w-100 px-4 py-2 rounded-5 gap-3 small fw-medium text-decoration-none ${
+                  pathname === link.href ? 'bg-info text-dark' : 'text-white hover-bg-white-10 hover-text-info'
+                } ${link.isButton ? 'bg-info text-dark rounded-pill px-4 my-2' : ''}`}
               >
-                <i className={`fas fa-${link.icon}`}></i>
+                {link.icon}
                 {link.text}
               </Link>
             </li>
@@ -111,12 +128,42 @@ const NavBar = () => {
         </ul>
       </div>
 
-      {/* Overlay */}
+      {/* ✅ Overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 bg-black/50 z-40 transition-opacity md:hidden"></div>
+        <div
+          className="position-fixed top-0 start-0 w-100 h-100 z-40 d-md-none"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+        ></div>
       )}
+
+      {/* ✅ Custom CSS */}
+      <style jsx>{`
+        .rounded-5 {
+          border-radius: 1rem;
+        }
+        .hover-bg-white-50:hover {
+          background-color: rgba(255, 255, 255, 0.5) !important;
+          color: #000 !important;
+        }
+        .hover-bg-white-10:hover {
+          background-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        .hover-text-info:hover {
+          color: #0dcaf0 !important;
+        }
+        .hover-bg-primary:hover {
+          background-color: #0b5ed7 !important;
+        }
+        .translate-x-100 {
+          transform: translateX(100%);
+        }
+        .translate-x-0 {
+          transform: translateX(0);
+        }
+        .transition-transform {
+          transition: transform 0.3s ease-in-out;
+        }
+      `}</style>
     </nav>
   );
-};
-
-export default NavBar;
+}

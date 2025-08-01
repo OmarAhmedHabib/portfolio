@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Personal Landing Page",
+    "description": "Simple yet elegant personal landing page showcasing bio and contact links.",
+    "badge": "Live",
+    "tech": ["HTML", "CSS"],
+    "image": "https://source.unsplash.com/featured/?portfolio",
+    "category": "ui",
+    "demo": "https://omarahmedhabib.github.io/-/",
+    "code": "https://github.com/OmarAhmedHabib"
+  },
+  {
+    "title": "Eslam Saif Portfolio",
+    "description": "Portfolio template built for Eslam, featuring responsive layout and smooth scroll.",
+    "badge": "",
+    "tech": ["HTML", "CSS", "JavaScript"],
+    "image": "https://source.unsplash.com/featured/?webdesign",
+    "category": "ui",
+    "demo": "https://omarahmedhabib.github.io/Eslam-Saif-Portfolio/",
+    "code": "https://github.com/OmarAhmedHabib"
+  },
+  {
+    "title": "3m Shaltat Interactive Site",
+    "description": "Creative interactive site for 3m, using custom animations and modern UI.",
+    "badge": "Featured",
+    "tech": ["HTML", "CSS", "JavaScript"],
+    "image": "https://source.unsplash.com/featured/?interactive",
+    "category": "animation",
+    "demo": "https://omarahmedhabib.github.io/3m-shaltat/",
+    "code": "https://github.com/OmarAhmedHabib"
+  },
+  {
+    "title": "Microsoft Calculator Clone",
+    "description": "A clean, functional clone of the Windows calculator app built in JS.",
+    "badge": "",
+    "tech": ["HTML", "CSS", "JavaScript"],
+    "image": "https://source.unsplash.com/featured/?calculator",
+    "category": "utility",
+    "demo": "https://omarahmedhabib.github.io/Calculator-microsoft/",
+    "code": "https://github.com/OmarAhmedHabib"
+  },
+  {
+    "title": "Ocena Dashboard (Vercel)",
+    "description": "A modern dashboard app deployed on Vercel with data visualizations.",
+    "badge": "Dashboard",
+    "tech": ["Next.js", "React"],
+    "image": "https://source.unsplash.com/featured/?dashboard",
+    "category": "react",
+    "demo": "https://ocena-i7q9.vercel.app/",
+    "code": "https://github.com/OmarAhmedHabib"
+  },
+  {
+    "title": "BU‑VO Project",
+    "description": "University project with custom UI and interactive elements.",
+    "badge": "",
+    "tech": ["HTML", "CSS", "JavaScript"],
+    "image": "https://source.unsplash.com/featured/?university",
+    "category": "academic",
+    "demo": "https://omarahmedhabib.github.io/BU-VO/",
+    "code": "https://github.com/OmarAhmedHabib"
+  },
+  {
+    "title": "Turbo Music Experience",
+    "description": "Creative music-themed site with animations and immersive UI.",
+    "badge": "Interactive",
+    "tech": ["HTML", "CSS", "JavaScript"],
+    "image": "https://source.unsplash.com/featured/?music",
+    "category": "animation",
+    "demo": "https://omarahmedhabib.github.io/TURBO-MUSIC/",
+    "code": "https://github.com/OmarAhmedHabib"
+  }
+]
